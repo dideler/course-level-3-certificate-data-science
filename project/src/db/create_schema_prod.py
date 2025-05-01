@@ -1,11 +1,10 @@
 from db.connection import get_connection
 
 
-def create_schemas(conn):
+def create_schema(conn):
     try:
         cur = conn.cursor()
-        cur.execute("CREATE SCHEMA IF NOT EXISTS raw;")
-        cur.execute("CREATE SCHEMA IF NOT EXISTS processed;")
+        cur.execute("CREATE SCHEMA IF NOT EXISTS prod;")
         conn.commit()
     except Exception as e:
         conn.rollback()
@@ -21,6 +20,6 @@ if __name__ == "__main__":
 
     conn = get_connection()
     try:
-        create_schemas(conn)
+        create_schema(conn)
     finally:
         conn.close()
